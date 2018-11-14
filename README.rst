@@ -22,7 +22,7 @@ Note: From squash-tm 1.19, Debian 8 users will also need backports repository in
  sudo apt update
 4. Install squash-tm:
  sudo apt install squash-tm # Debian 9
-or
+or:
  sudo apt -t jessie-backports install squash-tm # Debian 8
  
 Configuration
@@ -41,28 +41,33 @@ Once installation is complete, squash-tm service is launched. Users can check th
 Alternative configuration (or squash-tm < 1.19)
 -----------------------------------------------
 Older squash-tm packages do not fully support database auto configuration, and do not even ship with postgreSQL scripts. Users can still use old squash-tm versions on postgreSQL database by following these steps:
+
 1. Preparing SquashTM database and user:
-sudo su - postgres
-psql
-CREATE DATABASE "squashtm" WITH ENCODING='UTF8'; 
-CREATE USER "squash-tm" WITH PASSWORD 'initial_pw', LOGIN; 
-GRANT ALL PRIVILEGES ON DATABASE "squashtm" TO "squash-tm"; 
-\q
-2. Configure postgreSQL so that squash-tm user can connect to squashtm database
+ sudo su - postgres
+ psql
+ CREATE DATABASE "squashtm" WITH ENCODING='UTF8'; 
+ CREATE USER "squash-tm" WITH PASSWORD 'initial_pw', LOGIN; 
+ GRANT ALL PRIVILEGES ON DATABASE "squashtm" TO "squash-tm"; 
+ \q
+
+2. Configure postgreSQL so that squash-tm user can connect to squashtm database:
 According to their needs, users should edit /etc/postgresql/<pg_version>/main/pg_hba.conf. Usually, right before the line stating local databases connection mode, adding a line stating:
-local squashtm squash-tm md5
-id enough.
+ local squashtm squash-tm md5
+is enough.
+
 3. Run PostgreSQL initialization script on the database:
 Users will first need to download the script according to squash-tm version, at https://repo.squashtest.org
 Then, users have to execute the script against squashtm database:
  su - squash-tm # if squash-tm user has already been created, which is done during the installation of squash-tm package (selecting h2 database during configuration)
  psql -U squash-tm -d squashtm < path/to/postgresql/initialization/script
- 4. Manually edit /etc/default/squash-tm file:
+ 
+4. Manually edit /etc/default/squash-tm file:
  DB_URL="jdbc:postgresql://localhost:5432/squashtm"
  DB_TYPE="postgresql"
  DB_USERNAME="squash-tm"
  DB_PASSWORD="initial_pw"
- 5. Restart squash-tm service:
-  sudo systemctl restart squash-tm
- or
-  sudo service squash-tm restart
+
+5. Restart squash-tm service:
+ sudo systemctl restart squash-tm
+or:
+ sudo service squash-tm restart
