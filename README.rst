@@ -75,7 +75,7 @@ or:
 Image
 -----
 
-.. image:: template/blob/master/picture.jpg
+.. image:: docs/picture.jpg
    :width: 200px
    :height: 100px
    :scale: 50 %
