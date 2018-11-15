@@ -71,3 +71,8 @@ Then, users have to execute the script against squashtm database:
  sudo systemctl restart squash-tm
 or:
  sudo service squash-tm restart
+ 
+Image
+-----
+
+.. image:: picture.jpg
