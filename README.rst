@@ -75,9 +75,10 @@ or:
 Image
 -----
 
-.. image:: docs/picture.jpg
-   :width: 200px
-   :height: 100px
-   :scale: 50 %
-   :alt: alternate text
-   :align: right
+.. figure:: docs/picture.jpg
+    :align: right
+    :figwidth: 200px
+    
+    Ceci est une légende
+    
+Ceci est du texte.
